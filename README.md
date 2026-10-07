@@ -1,8 +1,7 @@
 # MyContactsApp
 
-[![.NET Build](https://github.com/your-username/MyContactsApp/actions/workflows/update-readme.yml/badge.svg)](https://github.com/your-username/MyContactsApp/actions/workflows/update-readme.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open Issues](https://img.shields.io/github/issues/your-username/MyContactsApp.svg)](https://github.com/your-username/MyContactsApp/issues)
+[![.NET Build](https://github.com/chetanb-11/MyContactsApp/actions/workflows/update-readme.yml/badge.svg)](https://github.com/chetanb-11/MyContactsApp/actions/workflows/update-readme.yml)
+[![Open Issues](https://img.shields.io/github/issues/chetanb-11/MyContactsApp.svg)](https://github.com/chetanb-11/MyContactsApp/issues)
 
 ## 🌟 About the Project
 
@@ -65,7 +64,7 @@ Follow these instructions to set up and run the project locally.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/MyContactsApp.git
+    git clone https://github.com/chetanb-11/MyContactsApp.git
     cd MyContactsApp
     ```
 
@@ -91,22 +90,3 @@ Follow these instructions to set up and run the project locally.
 
 3.  **Access the application:**
     Once the application starts, it will typically be available at `https://localhost:5001` or `http://localhost:5000` (check the console output for the exact URL). Open this URL in your web browser.
-
-## 🤝 Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📧 Contact
-
-Your Name/Organization - [your.email@example.com](mailto:your.email@example.com)
-Project Link: [https://github.com/your-username/MyContactsApp](https://github.com/your-username/MyContactsApp)
