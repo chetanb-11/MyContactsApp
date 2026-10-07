@@ -9,28 +9,27 @@
         <!-- Redirects to /Contacts/Create -->
         <a asp-controller="Contact" asp-action="AddContact" class="btn btn-primary">
             Add New Contact
-        </a>@{
-    ViewData["Title"] = "Choose an Option";
-}
-
-<div class="container mt-4">
-    <h3>Select an Action</h3>
-    <div class="d-flex gap-3 mt-3">
-        <!-- Redirects to ContactController.AddContact -->
-        <a asp-controller="Contact" asp-action="AddContact" class="btn btn-primary">
-            Add New Contact
         </a>
+        @{ ViewData["Title"] = "Choose an Option"; }
 
-        <!-- Redirects to View All Contacts -->
-        <a asp-controller="Contact" asp-action="Index" class="btn btn-secondary">
-            View All Contacts
-        </a>
+        <div class="container mt-4">
+            <h3>Select an Action</h3>
+            <div class="d-flex gap-3 mt-3">
+                <!-- Redirects to ContactController.AddContact -->
+                <a asp-controller="Contact" asp-action="AddContact" class="btn btn-primary">
+                    Add New Contact
+                </a>
 
-        <!-- Redirects to /Search -->
-        <a asp-controller="Contact" asp-action="Search" class="btn btn-outline-info">
-            Search Contacts
-        </a>
-    </div>
-</div>
+                <!-- Redirects to View All Contacts -->
+                <a asp-controller="Contact" asp-action="Index" class="btn btn-secondary">
+                    View All Contacts
+                </a>
+
+                <!-- Redirects to /Search -->
+                <a asp-controller="Contact" asp-action="Search" class="btn btn-outline-info">
+                    Search Contacts
+                </a>
+            </div>
+        </div>
     </div>
 </div>
