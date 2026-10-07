@@ -1,0 +1,11 @@
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\bin\Debug\net10.0\MyContactsApp.Core.deps.json
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\bin\Debug\net10.0\MyContactsApp.Core.dll
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\bin\Debug\net10.0\MyContactsApp.Core.pdb
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.AssemblyInfoInputs.cache
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.AssemblyInfo.cs
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.csproj.CoreCompileInputs.cache
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.dll
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\refint\MyContactsApp.Core.dll
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.pdb
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\ref\MyContactsApp.Core.dll

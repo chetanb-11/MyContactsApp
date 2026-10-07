@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ljtX+zAUryM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cheta\\RiderProjects\\MyContactsApp\\MyContactsApp.Web\\MyContactsApp.Web.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cheta\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.12\\microsoft.entityframeworkcore.10.0.12.nupkg.sha512",
+    "C:\\Users\\cheta\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.12\\microsoft.entityframeworkcore.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\cheta\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.12\\microsoft.entityframeworkcore.analyzers.10.0.12.nupkg.sha512",
+    "C:\\Users\\cheta\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\9.0.0\\microsoft.entityframeworkcore.relational.9.0.0.nupkg.sha512",
+    "C:\\Users\\cheta\\.nuget\\packages\\mysqlconnector\\2.6.2\\mysqlconnector.2.6.2.nupkg.sha512",
+    "C:\\Users\\cheta\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
