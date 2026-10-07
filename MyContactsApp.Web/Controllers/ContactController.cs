@@ -8,6 +8,10 @@ public class ContactController : Controller
 {
     private List<Contact> _contacts = [];
 
+    public IActionResult Index()
+    {
+        return View();
+    }
     public IActionResult AddContact()
     {
         var model = new Contact();
