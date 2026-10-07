@@ -20,5 +20,15 @@
     "C:\\Users\\cheta\\.nuget\\packages\\mysqlconnector\\2.6.2\\mysqlconnector.2.6.2.nupkg.sha512",
     "C:\\Users\\cheta\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\cheta\\RiderProjects\\MyContactsApp\\MyContactsApp.Infrastructure\\MyContactsApp.Infrastructure.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cheta\\RiderProjects\\MyContactsApp\\MyContactsApp.Infrastructure\\MyContactsApp.Infrastructure.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

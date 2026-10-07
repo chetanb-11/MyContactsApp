@@ -9,3 +9,4 @@ C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\refint\MyContactsApp.Core.dll
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.pdb
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\ref\MyContactsApp.Core.dll
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Core\obj\Debug\net10.0\MyContactsApp.Core.sourcelink.json

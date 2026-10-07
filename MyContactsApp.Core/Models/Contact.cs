@@ -12,7 +12,7 @@ public class Contact
     public string PhoneNumber { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 
-    public int? AddressBookId { get; set; }
+    // public int? AddressBookId { get; set; }
 
     public override string ToString()
     {

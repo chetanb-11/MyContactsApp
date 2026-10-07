@@ -13,3 +13,4 @@ C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Infrastructure\obj\Debu
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Infrastructure\obj\Debug\net10.0\refint\MyContactsApp.Infrastructure.dll
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Infrastructure\obj\Debug\net10.0\MyContactsApp.Infrastructure.pdb
 C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Infrastructure\obj\Debug\net10.0\ref\MyContactsApp.Infrastructure.dll
+C:\Users\cheta\RiderProjects\MyContactsApp\MyContactsApp.Infrastructure\obj\Debug\net10.0\MyContactsApp.Infrastructure.sourcelink.json
