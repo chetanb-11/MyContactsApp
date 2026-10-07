@@ -3,7 +3,7 @@ name: Auto-Sync README with Push Changes
 on:
   push:
     branches:
-      - main  # Change to master if your default branch is master
+      - main
     paths-ignore:
       - 'README.md'
       - '.github/**'
@@ -28,71 +28,10 @@ jobs:
       - name: Install Google GenAI SDK
         run: npm install @google/genai
 
-      - name: Update README based on Git Diff
+      - name: Run README Generator Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          node -e '
-          const fs = require("fs");
-          const { execSync } = require("child_process");
-          const { GoogleGenAI } = require("@google/genai");
-
-          async function main() {
-            let diff = "";
-            try {
-              diff = execSync("git diff HEAD~1 HEAD --stat -p -- . \":(exclude)README.md\" \":(exclude)package-lock.json\"").toString().slice(0, 15000);
-            } catch (e) {
-              console.log("Could not compute diff, might be the initial commit.");
-            }
-
-            const commitMsg = execSync("git log -1 --pretty=%B").toString().trim();
-            const currentReadme = fs.existsSync("README.md") ? fs.readFileSync("README.md", "utf8") : "";
-
-            if (!diff.trim() && currentReadme.trim()) {
-              console.log("No code changes detected outside ignored files.");
-              return;
-            }
-
-            const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-            
-            const prompt = `
-          You are a technical documentation assistant.
-          You are given the current README.md of a repository, the latest commit message, and the git diff of the latest push.
-
-          --- LATEST COMMIT MESSAGE ---
-          ${commitMsg}
-
-          --- GIT DIFF OF CHANGES ---
-          ${diff}
-
-          --- CURRENT README.MD ---
-          ${currentReadme}
-
-          TASK:
-          - Review the code changes made in the git diff.
-          - Update the README.md so it accurately reflects any new features, API endpoints, dependencies, or architectural adjustments introduced in this push.
-          - Preserve existing style, custom links, and headers where possible.
-          - Return ONLY the updated, raw markdown content without any wrapping code fences (no \`\`\`markdown or \`\`\`).
-          `;
-
-            const response = await ai.models.generateContent({
-              model: "gemini-2.5-flash",
-              contents: prompt,
-            });
-
-            let updatedText = response.text.trim();
-            if (updatedText.startsWith("\`\`\`markdown")) updatedText = updatedText.slice(11);
-            if (updatedText.startsWith("\`\`\`")) updatedText = updatedText.slice(3);
-            if (updatedText.endsWith("\`\`\`")) updatedText = updatedText.slice(0, -3);
-
-            fs.writeFileSync("README.md", updatedText.trim() + "\n");
-          }
-
-          main().catch(err => {
-            console.error(err);
-            process.exit(1);
-          });
-          '
+        run: node scripts/update-readme.mjs
 
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
