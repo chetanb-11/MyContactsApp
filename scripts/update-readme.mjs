@@ -11,8 +11,8 @@ async function main() {
   let diff = "";
   try {
     diff = execSync('git diff HEAD~1 HEAD --stat -p -- . ":(exclude)README.md" ":(exclude)package-lock.json"')
-      .toString()
-      .slice(0, 15000);
+        .toString()
+        .slice(0, 15000);
   } catch (err) {
     console.log("Could not extract diff, proceeding with general context.");
   }
@@ -44,14 +44,18 @@ CURRENT README:
 ${currentReadme || "(Empty file)"}
 
 INSTRUCTIONS:
-1. Provide a full, beautifully formatted GitHub README.md in raw Markdown.
+1. Provide a clean, accurate GitHub README.md in raw Markdown.
 2. Include:
    - Project title and clear summary of what the project does.
    - Tech Stack (.NET, C#, Architecture layers like Core, Infrastructure, Web).
    - Project Structure / Architecture overview.
    - Setup & Run instructions (dotnet build, dotnet run).
-   - Any features or use cases added based on the commits/diff.
-3. DO NOT output introductory text, notes, or explanations.
+   - Features or use cases added based on the commits/diff.
+3. STRICT NEGATIVE CONSTRAINTS:
+   - DO NOT include a "License" section or mention MIT / licensing.
+   - DO NOT include a "Contact", "Author", or "Contributing" section.
+   - DO NOT generate placeholder emails (e.g., your.email@example.com) or fake social links.
+   - DO NOT output introductory text, notes, or meta commentary.
 4. Output ONLY the raw Markdown content. Do not wrap the final output in outer \`\`\`markdown code fences.
 `;
 
@@ -69,12 +73,15 @@ INSTRUCTIONS:
 
   text = text.trim();
 
+  // Programmatic fallback cleanup to strip License or Contact sections if generated
+  text = text.replace(/##?\s*(License|Licence|Contact|Contributing)[\s\S]*?(?=(##?\s|$))/gi, "").trim();
+
   if (!text) {
     throw new Error("Received empty response from Gemini API.");
   }
 
   fs.writeFileSync("README.md", text + "\n");
-  console.log("README.md successfully updated!");
+  console.log("README.md successfully updated without License/Contact sections!");
 }
 
 main().catch((err) => {
