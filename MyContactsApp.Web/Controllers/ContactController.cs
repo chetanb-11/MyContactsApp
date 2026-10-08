@@ -34,6 +34,12 @@ public class ContactController(
         }
 
         var createdContact = await _contactService.CreateContact(contact);
+        if (createdContact == null)
+        {
+            TempData["Message"] = $"Contact with same name already exists";
+            ModelState.AddModelError(string.Empty, "Contact with same name already exists");
+            return View(contact);
+        }
 
         TempData["Message"] =
             $"Contact '{createdContact.FirstName} {createdContact.LastName}' was successfully added!";

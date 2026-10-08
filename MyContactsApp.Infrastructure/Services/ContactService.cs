@@ -8,10 +8,15 @@ public class ContactService(AppDbContext appDbContext) : IContactService
 {
     private readonly AppDbContext _appDbContext = appDbContext;
 
-    public async Task<Contact> CreateContact(Contact contact)
+    public async Task<Contact?> CreateContact(Contact contact)
     {
         try
         {
+            var exists = await ExistsByName(contact.FirstName, contact.LastName);
+            if (exists)
+            {
+                return null;
+            }
             _appDbContext.Contacts.Add(contact);
             await _appDbContext.SaveChangesAsync();
             return contact;
@@ -28,7 +33,10 @@ public class ContactService(AppDbContext appDbContext) : IContactService
         return await ExistsById(contact.Id);
     }
 
-    
+    public Task<bool> ExistsByName(string firstName, string lastName)
+    {
+        return _appDbContext.Contacts.AnyAsync(c => c.FirstName == firstName && c.LastName == lastName);
+    }
 
     public async Task<bool> ExistsById(int id)
     {
@@ -48,8 +56,8 @@ public class ContactService(AppDbContext appDbContext) : IContactService
     {
         try
         {
-            var exist = ExistsById(id);
-            if (!exist.Result)
+            var exist = await ExistsById(id);
+            if (!exist)
             {
                 return null;
             }
