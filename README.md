@@ -5,14 +5,15 @@
 
 ## 🌟 About the Project
 
-`MyContactsApp` is a modern ASP.NET Core web application designed to help users efficiently manage their personal and professional contacts. It provides a clean, intuitive interface for adding new contacts, viewing existing ones, and searching through them. Built with a clear separation of concerns using a layered architecture, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
+`MyContactsApp` is a modern ASP.NET Core web application designed to help users efficiently manage their personal and professional contacts. It now includes the ability to organize contacts into distinct address books. The application provides a clean, intuitive interface for adding, viewing, searching, and managing contacts and their associated address books, along with features to count contacts. Built with a clear separation of concerns using a layered architecture and a dedicated service layer, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
 
 ## ✨ Features
 
-*   **Add New Contacts:** Easily create and save new contact entries with essential details.
-*   **View All Contacts:** Browse through a comprehensive list of all stored contacts.
-*   **Search Contacts:** Quickly find specific contacts using robust search functionalities.
-*   **Robust Validation:** Ensures data integrity with custom validation rules for contact information.
+*   **Address Book Management:** Organize contacts into custom address books for better categorization and management.
+*   **Contact Counting:** Easily view the total number of contacts or specifically count contacts within any given address book.
+*   **Comprehensive Contact Management:** Add, view, edit, and delete contact entries with essential details, including the ability to associate them with an address book.
+*   **Robust Data Validation:** Ensures data integrity with custom validation rules for contact and address book information.
+*   **Efficient Search:** Quickly find specific contacts using robust search functionalities across all stored data.
 
 ## 🚀 Tech Stack
 
@@ -33,7 +34,7 @@ The application follows a clean, layered architecture to ensure maintainability,
 ```
 MyContactsApp
 ├── MyContactsApp.Web           (Presentation Layer - ASP.NET Core MVC)
-├── MyContactsApp.Infrastructure (Persistence Layer - Entity Framework Core, Data Context)
+├── MyContactsApp.Infrastructure (Persistence & Service Layer - Entity Framework Core, Data Context, Business Services)
 └── MyContactsApp.Core          (Domain Layer - Models, Validations, Business Logic)
 ```
 
@@ -41,13 +42,13 @@ MyContactsApp
     *   This is the entry point of the application, an ASP.NET Core MVC project.
     *   Handles HTTP requests, renders views, and orchestrates user interactions.
     *   Contains Controllers, Views (`.cshtml`), and startup configuration (`Program.cs`).
-*   **`MyContactsApp.Infrastructure` (Persistence Layer):**
-    *   Responsible for data access and external integrations.
-    *   Utilizes Entity Framework Core to interact with the database (`AppDbContext.cs`).
-    *   Manages data storage and retrieval, abstracting the details from the business logic.
+*   **`MyContactsApp.Infrastructure` (Persistence & Service Layer):**
+    *   Responsible for data access and encapsulating core business services.
+    *   Utilizes Entity Framework Core to interact with the database (`AppDbContext.cs`), defining relationships like `AddressBook` to `Contact`.
+    *   Contains dedicated services (`ContactService`, `AddressBookService`) that implement business logic and interact with the data store, abstracting details from the presentation layer.
 *   **`MyContactsApp.Core` (Domain Layer):**
     *   The heart of the application, containing the core business logic and domain models.
-    *   Defines entities (`Contact.cs`), value objects, and custom validations (`IsValidNameAttribute.cs`).
+    *   Defines entities like `Contact.cs` and `AddressBook.cs`, value objects, and custom validations (`IsValidNameAttribute.cs`).
     *   Independent of any specific infrastructure or presentation concerns.
 
 ## ⚙️ Getting Started
