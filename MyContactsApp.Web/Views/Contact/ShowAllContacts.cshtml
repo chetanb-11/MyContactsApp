@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MyContactsApp.Core.Models.Contact>
+
+@{
+    ViewData["Title"] = "All Contacts";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>All Contacts</h2>
+        <a asp-controller="Contact" asp-action="AddContact" class="btn btn-primary">
+            + Add New Contact
+        </a>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No contacts found. Click "Add New Contact" to create one.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle border">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City / State / Zip</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contact in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@contact.FirstName @contact.LastName</td>
+                            <td>@contact.Address</td>
+                            <td>@contact.City, @contact.State @contact.Zip</td>
+                            <td>@contact.PhoneNumber</td>
+                            <td>@contact.Email</td>
+                            <td class="text-center">
+                                <a asp-controller="Contact" asp-action="EditContact" asp-route-id="@contact.Id" class="btn btn-sm btn-outline-warning">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

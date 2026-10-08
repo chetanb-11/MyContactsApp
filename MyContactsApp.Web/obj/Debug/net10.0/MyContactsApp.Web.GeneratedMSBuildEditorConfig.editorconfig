@@ -27,8 +27,20 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxBZGRDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Contact/EditContact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxFZGl0Q29udGFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Contact/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Contact/ShowAllContacts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxTaG93QWxsQ29udGFjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Contact/_ContactFormFields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxfQ29udGFjdEZvcm1GaWVsZHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Home/Index.cshtml]
