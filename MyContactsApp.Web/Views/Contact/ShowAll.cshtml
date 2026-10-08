@@ -6,8 +6,16 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>All Contacts</h2>
-        <a asp-controller="Contact" asp-action="AddContact" class="btn btn-primary">
+        <div>
+            <h2 class="mb-1">All Contacts</h2>
+            @if (ViewBag.TotalContacts != null)
+            {
+                <span class="badge bg-secondary fs-6">
+                    Total contacts in all address books: @ViewBag.TotalContacts
+                </span>
+            }
+        </div>
+        <a asp-controller="Contact" asp-action="Add" class="btn btn-primary">
             + Add New Contact
         </a>
     </div>
@@ -33,6 +41,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Name</th>
+                        <th>Address Book</th>
                         <th>Address</th>
                         <th>City / State / Zip</th>
                         <th>Phone</th>
@@ -45,14 +54,29 @@
                     {
                         <tr>
                             <td class="fw-semibold">@contact.FirstName @contact.LastName</td>
+                            <td>
+                                @if (contact.AddressBook != null)
+                                {
+                                    <span class="badge bg-info text-dark">@contact.AddressBook.Name</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">None</span>
+                                }
+                            </td>
                             <td>@contact.Address</td>
                             <td>@contact.City, @contact.State @contact.Zip</td>
                             <td>@contact.PhoneNumber</td>
                             <td>@contact.Email</td>
                             <td class="text-center">
-                                <a asp-controller="Contact" asp-action="EditContact" asp-route-id="@contact.Id" class="btn btn-sm btn-outline-warning">
+                                <a asp-controller="Contact" asp-action="Edit" asp-route-id="@contact.Id" class="btn btn-sm btn-outline-warning">
                                     Edit
                                 </a>
+                                <form asp-controller="Contact" asp-action="Delete" asp-route-id="@contact.Id" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     }

@@ -1,0 +1,15 @@
+﻿using MyContactsApp.Core.Models;
+
+namespace MyContactsApp.Infrastructure.Services;
+
+public interface IContactService
+{
+    public Task<Contact> CreateContact(Contact contact);
+    public Task<bool> ExistsByContact(Contact contact);
+    public Task<bool> ExistsById(int id);
+    public Task<Contact?> FindContact(int id);
+    public Task<Contact?> UpdateContact(int id, Contact contact);
+    public Task<bool> DeleteContact(int id);
+    public Task<List<Contact>> ShowAllContacts();
+
+}

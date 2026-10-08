@@ -2,12 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using MyContactsApp.Core.Models;
 using MyContactsApp.Infrastructure.Data;
+using MyContactsApp.Infrastructure.Services;
 
 namespace MyContactsApp.Web.Controllers;
 
-public class ContactController(AppDbContext appDbContext) : Controller
+public class ContactController(
+    IAddressBookService addressBookService,
+    IContactService contactService) : Controller
 {
-    private readonly AppDbContext _appDbContext = appDbContext;
+    private readonly IAddressBookService _addressBookService = addressBookService;
+    private readonly IContactService _contactService = contactService;
 
     public IActionResult Index()
     {
@@ -15,72 +19,73 @@ public class ContactController(AppDbContext appDbContext) : Controller
     }
 
     [HttpGet]
-    public IActionResult AddContact()
+    public IActionResult Add()
     {
         var model = new Contact();
         return View(model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddContact(Contact contact)
+    public async Task<IActionResult> Add(Contact contact)
     {
         if (!ModelState.IsValid)
         {
             return View(contact);
         }
 
-        _appDbContext.Contacts.Add(contact);
-        await _appDbContext.SaveChangesAsync();
-        TempData["Message"] = $"Contact '{contact.FirstName} {contact.LastName}' was successfully added!";
-        return RedirectToAction(nameof(ShowAllContacts));
+        var createdContact = await _contactService.CreateContact(contact);
+
+        TempData["Message"] =
+            $"Contact '{createdContact.FirstName} {createdContact.LastName}' was successfully added!";
+        return RedirectToAction(nameof(ShowAll));
     }
 
     [HttpGet]
-    public async Task<IActionResult> EditContact(int id)
+    public async Task<IActionResult> Edit(int id)
     {
-        var contact = await _appDbContext.Contacts.FindAsync(id);
+        var contact = await _contactService.FindContact(id);
         if (contact == null)
         {
             return NotFound();
         }
+
         return View(contact);
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditContact(int id, Contact contact)
+    public async Task<IActionResult> Edit(int id, Contact updatedContact)
     {
-        if (id != contact.Id)
+        if (id != updatedContact.Id)
         {
             return BadRequest();
         }
 
         if (!ModelState.IsValid)
         {
-            return View(contact);
+            return View(updatedContact);
         }
 
-        try
-        {
-            _appDbContext.Contacts.Update(contact);
-            await _appDbContext.SaveChangesAsync();
+        var contact = await _contactService.UpdateContact(id, updatedContact);
+        if (contact != null)
             TempData["Message"] = $"Contact '{contact.FirstName} {contact.LastName}' was successfully updated!";
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!await _appDbContext.Contacts.AnyAsync(c => c.Id == id))
-            {
-                return NotFound();
-            }
-            throw;
-        }
 
-        return RedirectToAction(nameof(ShowAllContacts));
+        return RedirectToAction(nameof(ShowAll));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var deleted = await _contactService.DeleteContact(id);
+        
+        return deleted ? RedirectToAction(nameof(ShowAll)) : NotFound("Contact not found");
     }
 
     [HttpGet]
-    public async Task<IActionResult> ShowAllContacts()
+    public async Task<IActionResult> ShowAll()
     {
-        var contacts = await _appDbContext.Contacts.AsNoTracking().ToListAsync();
+        var contacts = await _contactService.ShowAllContacts();
+
+        ViewBag.TotalContacts = await _addressBookService.GetTotalContactsCountAsync();
         return View(contacts);
     }
 }

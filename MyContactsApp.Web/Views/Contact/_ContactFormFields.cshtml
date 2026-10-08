@@ -1,52 +1,121 @@
-﻿@model MyContactsApp.Core.Models.Contact
+﻿@model Contact;
+@using MyContactsApp.Core.Models
+@{
+    var isEdit = (ViewData["isEdit"] as bool?) ?? false;
+}
 
 <div class="row g-3">
     <div class="col-md-6">
-        <label asp-for="FirstName" class="form-label">First Name</label>
-        <input asp-for="FirstName" class="form-control" placeholder="e.g. John" />
+        <label asp-for="FirstName" class="form-label d-flex justify-content-between">
+            <span>First Name</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.FirstName</strong></span>
+            }
+        </label>
+        <input asp-for="FirstName" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "e.g. John")" />
         <span asp-validation-for="FirstName" class="text-danger small"></span>
     </div>
 
     <div class="col-md-6">
-        <label asp-for="LastName" class="form-label">Last Name</label>
-        <input asp-for="LastName" class="form-control" placeholder="e.g. Doe" />
+        <label asp-for="LastName" class="form-label d-flex justify-content-between">
+            <span>Last Name</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.LastName</strong></span>
+            }
+        </label>
+        <input asp-for="LastName" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "e.g. Doe")" />
         <span asp-validation-for="LastName" class="text-danger small"></span>
     </div>
 
     <div class="col-12">
-        <label asp-for="Address" class="form-label">Address</label>
-        <input asp-for="Address" class="form-control" placeholder="1234 Main St" />
+        <label asp-for="Address" class="form-label d-flex justify-content-between">
+            <span>Address</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.Address</strong></span>
+            }
+        </label>
+        <input asp-for="Address" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "1234 Main St")" />
         <span asp-validation-for="Address" class="text-danger small"></span>
     </div>
 
     <div class="col-md-6">
-        <label asp-for="City" class="form-label">City</label>
-        <input asp-for="City" class="form-control" placeholder="e.g. New York" />
+        <label asp-for="City" class="form-label d-flex justify-content-between">
+            <span>City</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.City</strong></span>
+            }
+        </label>
+        <input asp-for="City" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "e.g. New York")" />
         <span asp-validation-for="City" class="text-danger small"></span>
     </div>
 
     <div class="col-md-4">
-        <label asp-for="State" class="form-label">State</label>
-        <input asp-for="State" class="form-control" placeholder="e.g. NY" />
+        <label asp-for="State" class="form-label d-flex justify-content-between">
+            <span>State</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.State</strong></span>
+            }
+        </label>
+        <input asp-for="State" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "e.g. NY")" />
         <span asp-validation-for="State" class="text-danger small"></span>
     </div>
 
     <div class="col-md-2">
-        <label asp-for="Zip" class="form-label">Zip Code</label>
-        <input asp-for="Zip" class="form-control" placeholder="e.g. 100001" />
+        <label asp-for="Zip" class="form-label d-flex justify-content-between">
+            <span>Zip Code</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.Zip</strong></span>
+            }
+        </label>
+        <input asp-for="Zip" class="form-control" value="" placeholder="@(isEdit ? "Leave blank" : "e.g. 100001")" />
         <span asp-validation-for="Zip" class="text-danger small"></span>
     </div>
 
     <div class="col-md-6">
-        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-        <input asp-for="PhoneNumber" class="form-control" placeholder="10 digit number" />
+        <label asp-for="PhoneNumber" class="form-label d-flex justify-content-between">
+            <span>Phone Number</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.PhoneNumber</strong></span>
+            }
+        </label>
+        <input asp-for="PhoneNumber" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "10 digit number")" />
         <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
     </div>
 
     <div class="col-md-6">
-        <label asp-for="Email" class="form-label">Email</label>
-        <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+        <label asp-for="Email" class="form-label d-flex justify-content-between">
+            <span>Email</span>
+            @if (isEdit)
+            {
+                <span class="text-muted small">Current: <strong>@Model.Email</strong></span>
+            }
+        </label>
+        <input asp-for="Email" class="form-control" value="" placeholder="@(isEdit ? "Leave blank to keep current" : "name@example.com")" />
         <span asp-validation-for="Email" class="text-danger small"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="AddressBookId" class="form-label d-flex justify-content-between">
+            <span>Address Book</span>
+            @if (isEdit && Model.AddressBookId.HasValue)
+            {
+                <span class="text-muted small">Current: <strong>Book #@Model.AddressBookId</strong></span>
+            }
+        </label>
+        <select asp-for="AddressBookId" class="form-select">
+            <option value="">-- @(isEdit ? "Keep current address book" : "Select Address Book") --</option>
+            <option value="1">Personal Contacts</option>
+            <option value="2">Work & Professional</option>
+            <option value="3">Service Providers</option>
+        </select>
+        <span asp-validation-for="AddressBookId" class="text-danger small"></span>
     </div>
 
     <div class="col-12 mt-4 d-flex gap-2">

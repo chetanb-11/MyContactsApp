@@ -1,6 +1,7 @@
 ﻿@model MyContactsApp.Core.Models.Contact
 @{
     ViewData["Title"] = "Edit Contact";
+    ViewData["isEdit"] = true;
 }
 
 <div class="row justify-content-center mt-4">
@@ -12,9 +13,9 @@
             <div class="card-body p-4">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
 
-                <form asp-controller="Contact" asp-action="EditContact" asp-route-id="@Model.Id" method="post">
+                <form asp-controller="Contact" asp-action="Edit" asp-route-id="@Model.Id" method="post">
                     <input type="hidden" asp-for="Id" />
-                    <partial name="_ContactFormFields.cshtml" model="Model"/>
+                    <partial name="_ContactFormFields.cshtml" model="Model" view-data="ViewData"/>
                 </form>
             </div>
         </div>
