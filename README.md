@@ -5,10 +5,11 @@
 
 ## 🌟 About the Project
 
-`MyContactsApp` is a modern ASP.NET Core web application designed to help users efficiently manage their personal and professional contacts. It now includes the ability to organize contacts into distinct address books. The application provides a clean, intuitive interface for adding, viewing, searching, and managing contacts and their associated address books, along with features to count contacts. Built with a clear separation of concerns using a layered architecture and a dedicated service layer, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
+`MyContactsApp` is a modern ASP.NET Core web application designed for efficient management of personal and professional contacts. It provides a clean, intuitive interface for adding, viewing, searching, and managing contacts, with features to organize them into distinct address books and count entries. A key enhancement includes robust **duplicate contact prevention**, ensuring that contacts with the same first and last name cannot be added. Built with a clear separation of concerns using a layered architecture and a dedicated service layer, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
 
 ## ✨ Features
 
+*   **Duplicate Contact Prevention:** Prevents the creation of contacts with identical first and last names, ensuring data uniqueness and integrity.
 *   **Address Book Management:** Organize contacts into custom address books for better categorization and management.
 *   **Contact Counting:** Easily view the total number of contacts or specifically count contacts within any given address book.
 *   **Comprehensive Contact Management:** Add, view, edit, and delete contact entries with essential details, including the ability to associate them with an address book.
