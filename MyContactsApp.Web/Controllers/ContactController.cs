@@ -19,6 +19,7 @@ public class ContactController(
         {
             return View();
         }
+
         var contacts = await _contactService.SearchContacts(searchQuery);
         return View(contacts);
     }
@@ -53,7 +54,8 @@ public class ContactController(
         var createdContact = await _contactService.CreateContact(contact);
         if (createdContact == null)
         {
-            ModelState.AddModelError(string.Empty, "Unable to save contact. A contact with this name or email may already exist.");
+            ModelState.AddModelError(string.Empty,
+                "Unable to save contact. A contact with this name or email may already exist.");
             return View(contact);
         }
 
@@ -109,26 +111,30 @@ public class ContactController(
     public async Task<IActionResult> Delete(int id)
     {
         var deleted = await _contactService.DeleteContact(id);
-        
+
         return deleted ? RedirectToAction(nameof(ShowAll)) : NotFound("Contact not found");
     }
 
     [HttpGet]
-    public async Task<IActionResult> ShowAll(string? sortBy, bool groupByState = false, bool groupByCity = false)
+    public async Task<IActionResult> ShowAll(string sortBy = "Id", bool groupByState = false, bool groupByCity = false)
     {
         var contacts = await _contactService.ShowAllContacts();
 
-        if (sortBy == "name")
+        contacts = sortBy.ToLowerInvariant()switch
         {
-            contacts = contacts
-                .OrderBy(c => c.FirstName)
-                .ThenBy(c => c.LastName)
-                .ToList();
-        }
+            "name" => contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName).ToList(),
+            "address" => contacts.OrderBy(c => c.Address).ToList(),
+            "city" => contacts.OrderBy(c => c.City).ToList(),
+            "state" => contacts.OrderBy(c => c.State).ToList(),
+            "zip" => contacts.OrderBy(c => c.Zip).ToList(),
+            _ => contacts.OrderBy(c => c.Id).ToList(),
+        };
+        
         ViewBag.TotalContacts = await _addressBookService.GetTotalContactsCountAsync();
         ViewBag.GroupByState = groupByState;
         ViewBag.GroupByCity = groupByCity;
-        
+        ViewBag.CurrentSort = sortBy;
+
         return View(contacts);
     }
 }

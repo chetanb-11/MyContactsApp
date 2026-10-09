@@ -16,8 +16,15 @@ else
                     <a asp-action="ShowAll" asp-route-sortBy="name" class="text-white">Name</a>
                 </th>
                 <th>Address Book</th>
-                <th>Address</th>
-                <th>City / State / Zip</th>
+                <th>
+                    <a asp-action="ShowAll" asp-route-sortBy="address" class="text-white">Address</a>
+                </th>
+                <th>
+                    <a asp-action="ShowAll" asp-route-sortBy="city" class="text-white">City</a>
+                    <a asp-action="ShowAll" asp-route-sortBy="state" class="text-white">State</a>
+                    <a asp-action="ShowAll" asp-route-sortBy="zip" class="text-white">Zip</a>
+                </th>
+                @* <th>City / State / Zip</th> *@
                 <th>Phone</th>
                 <th>Email</th>
                 <th class="text-center">Actions</th>
