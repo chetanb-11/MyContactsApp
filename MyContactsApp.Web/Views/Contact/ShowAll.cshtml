@@ -78,6 +78,9 @@
                         <h5 class="mb-0 fw-bold text-primary">
                             <i class="bi bi-geo-alt"></i> @stateGroup.Key
                         </h5>
+                        <span class="badge bg-primary rounded-pill">
+                            @stateGroup.Count() @(stateGroup.Count() == 1 ? "contact" : "contacts")
+                        </span>
                     </div>
                     <div class="card-body p-0">
                         <partial name="_ShowContactTable" model="stateGroup" />
@@ -93,6 +96,9 @@
                         <h5 class="mb-0 fw-bold text-primary">
                             <i class="bi bi-geo-alt"></i> @cityGroup.Key
                         </h5>
+                        <span class="badge bg-primary rounded-pill">
+                            @cityGroup.Count() @(cityGroup.Count() == 1 ? "contact" : "contacts")
+                        </span>
                     </div>
                     <div class="card-body p-0">
                         <partial name="_ShowContactTable" model="cityGroup" />
