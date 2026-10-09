@@ -2,6 +2,40 @@ import fs from "fs";
 import { execSync } from "child_process";
 import { GoogleGenAI } from "@google/genai";
 
+function isTransientGeminiError(err) {
+  const status = Number(err?.status ?? err?.error?.code);
+  return status === 429 || status === 503;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function generateContentWithRetry(ai, prompt) {
+  const maxAttempts = 4;
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: prompt,
+      });
+    } catch (err) {
+      lastError = err;
+      if (!isTransientGeminiError(err) || attempt === maxAttempts) {
+        throw err;
+      }
+
+      const waitMs = 1000 * Math.pow(2, attempt - 1);
+      console.warn(`Gemini API unavailable (attempt ${attempt}/${maxAttempts}). Retrying in ${waitMs}ms...`);
+      await sleep(waitMs);
+    }
+  }
+
+  throw lastError;
+}
+
 async function main() {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error("GEMINI_API_KEY is not defined in environment variables.");
@@ -59,10 +93,16 @@ INSTRUCTIONS:
 4. Output ONLY the raw Markdown content. Do not wrap the final output in outer \`\`\`markdown code fences.
 `;
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
+  let response;
+  try {
+    response = await generateContentWithRetry(ai, prompt);
+  } catch (err) {
+    if (isTransientGeminiError(err)) {
+      console.warn("Skipping README update due to temporary Gemini API unavailability.");
+      return;
+    }
+    throw err;
+  }
 
   let text = response.text ? response.text.trim() : "";
 
