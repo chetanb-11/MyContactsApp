@@ -5,7 +5,7 @@
 
 ## 🌟 About the Project
 
-`MyContactsApp` is a modern ASP.NET Core web application designed for efficient management of personal and professional contacts. It provides a clean, intuitive interface for adding, viewing, searching, and managing contacts, with features to organize them into distinct address books and count entries. A key enhancement includes robust **duplicate contact prevention**, ensuring that contacts with the same first and last name cannot be added. Built with a clear separation of concerns using a layered architecture and a dedicated service layer, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
+`MyContactsApp` is a modern ASP.NET Core web application designed for efficient management of personal and professional contacts. It provides a clean, intuitive interface for adding, viewing, searching, and managing contacts, with features to organize them into distinct address books and count entries. A key enhancement includes robust **duplicate contact prevention**, ensuring that contacts with the same first and last names cannot be added. Furthermore, the application now offers **location-based grouping**, allowing users to conveniently view and organize contacts by their respective states. Built with a clear separation of concerns using a layered architecture and a dedicated service layer, this application demonstrates best practices in .NET development, including domain modeling, data persistence with Entity Framework Core, and an ASP.NET Core MVC web presentation layer.
 
 ## ✨ Features
 
@@ -15,6 +15,7 @@
 *   **Comprehensive Contact Management:** Add, view, edit, and delete contact entries with essential details, including the ability to associate them with an address book.
 *   **Robust Data Validation:** Ensures data integrity with custom validation rules for contact and address book information.
 *   **Efficient Search:** Quickly find specific contacts using robust search functionalities across all stored data.
+*   **Location-Based Grouping:** Easily organize and view contacts grouped by their state, providing a clear overview of contacts across different geographical locations.
 
 ## 🚀 Tech Stack
 
@@ -25,7 +26,7 @@ This project is built using the following technologies:
 *   **Web Framework:** ASP.NET Core MVC
 *   **Data Access:** Entity Framework Core
 *   **Database:** (Implicitly configured, often SQLite or SQL Server for development)
-*   **Frontend:** HTML, CSS (Bootstrap-inspired styling)
+*   **Frontend:** HTML, CSS (Bootstrap-inspired styling), Bootstrap Icons
 *   **IDE:** Rider (inferred from `.idea` files)
 
 ## 🏗️ Architecture
