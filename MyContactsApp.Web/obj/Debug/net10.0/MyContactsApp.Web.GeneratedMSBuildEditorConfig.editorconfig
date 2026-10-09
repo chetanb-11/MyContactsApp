@@ -43,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxfQ29udGFjdEZvcm1GaWVsZHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Contact/_ShowContactTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxfU2hvd0NvbnRhY3RUYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cheta/RiderProjects/MyContactsApp/MyContactsApp.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

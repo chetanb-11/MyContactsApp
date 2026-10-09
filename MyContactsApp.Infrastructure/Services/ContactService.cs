@@ -8,6 +8,39 @@ public class ContactService(AppDbContext appDbContext) : IContactService
 {
     private readonly AppDbContext _appDbContext = appDbContext;
 
+    public Task<List<Contact>> SearchContacts(string searchQuery)
+    {
+        try
+        {
+            var term = searchQuery;
+            var query = _appDbContext.Contacts
+                .AsQueryable()
+                .Include(c => c.AddressBook)
+                .AsNoTracking();
+
+            if (string.IsNullOrWhiteSpace(searchQuery))
+            {
+                return query
+                    .OrderBy(c => c.Id)
+                    .ToListAsync();
+            }
+
+            var searchContacts = query.Where(c =>
+                c.FirstName.Contains(term) ||
+                c.LastName.Contains(term) ||
+                c.Email.Contains(term) ||
+                c.PhoneNumber.Contains(term) ||
+                c.City.Contains(term)
+            );
+            return searchContacts.OrderBy(c => c.LastName).ThenBy(c => c.FirstName).ToListAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
     public async Task<Contact?> CreateContact(Contact contact)
     {
         try
@@ -17,9 +50,20 @@ public class ContactService(AppDbContext appDbContext) : IContactService
             {
                 return null;
             }
+
+            var emailExists = await ExistsByEmail(contact.Email);
+            if (emailExists)
+            {
+                return null;
+            }
+
             _appDbContext.Contacts.Add(contact);
             await _appDbContext.SaveChangesAsync();
             return contact;
+        }
+        catch (DbUpdateException)
+        {
+            return null;
         }
         catch (Exception e)
         {
@@ -36,6 +80,12 @@ public class ContactService(AppDbContext appDbContext) : IContactService
     public Task<bool> ExistsByName(string firstName, string lastName)
     {
         return _appDbContext.Contacts.AnyAsync(c => c.FirstName == firstName && c.LastName == lastName);
+    }
+
+    public Task<bool> ExistsByEmail(string email, int? excludeId = null)
+    {
+        return _appDbContext.Contacts
+            .AnyAsync(c => c.Email == email && (!excludeId.HasValue || c.Id != excludeId.Value));
     }
 
     public async Task<bool> ExistsById(int id)
@@ -76,6 +126,12 @@ public class ContactService(AppDbContext appDbContext) : IContactService
     {
         try
         {
+            var emailExists = await ExistsByEmail(contact.Email, id);
+            if (emailExists)
+            {
+                return null;
+            }
+
             _appDbContext.Contacts.Update(contact);
             await _appDbContext.SaveChangesAsync();
             return contact;
@@ -88,6 +144,10 @@ public class ContactService(AppDbContext appDbContext) : IContactService
             }
 
             throw;
+        }
+        catch (DbUpdateException)
+        {
+            return null;
         }
     }
 

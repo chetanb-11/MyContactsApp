@@ -13,9 +13,14 @@ public class ContactController(
     private readonly IAddressBookService _addressBookService = addressBookService;
     private readonly IContactService _contactService = contactService;
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(string? searchQuery)
     {
-        return View();
+        if (string.IsNullOrEmpty(searchQuery))
+        {
+            return View();
+        }
+        var contacts = await _contactService.SearchContacts(searchQuery);
+        return View(contacts);
     }
 
     [HttpGet]
@@ -33,11 +38,22 @@ public class ContactController(
             return View(contact);
         }
 
+        if (await _contactService.ExistsByName(contact.FirstName, contact.LastName))
+        {
+            ModelState.AddModelError(string.Empty, "Contact with same name already exists");
+            return View(contact);
+        }
+
+        if (await _contactService.ExistsByEmail(contact.Email))
+        {
+            ModelState.AddModelError(nameof(contact.Email), "A contact with this email already exists.");
+            return View(contact);
+        }
+
         var createdContact = await _contactService.CreateContact(contact);
         if (createdContact == null)
         {
-            TempData["Message"] = $"Contact with same name already exists";
-            ModelState.AddModelError(string.Empty, "Contact with same name already exists");
+            ModelState.AddModelError(string.Empty, "Unable to save contact. A contact with this name or email may already exist.");
             return View(contact);
         }
 
@@ -71,9 +87,20 @@ public class ContactController(
             return View(updatedContact);
         }
 
+        if (await _contactService.ExistsByEmail(updatedContact.Email, id))
+        {
+            ModelState.AddModelError(nameof(updatedContact.Email), "A contact with this email already exists.");
+            return View(updatedContact);
+        }
+
         var contact = await _contactService.UpdateContact(id, updatedContact);
-        if (contact != null)
-            TempData["Message"] = $"Contact '{contact.FirstName} {contact.LastName}' was successfully updated!";
+        if (contact == null)
+        {
+            ModelState.AddModelError(string.Empty, "Unable to update contact.");
+            return View(updatedContact);
+        }
+
+        TempData["Message"] = $"Contact '{contact.FirstName} {contact.LastName}' was successfully updated!";
 
         return RedirectToAction(nameof(ShowAll));
     }

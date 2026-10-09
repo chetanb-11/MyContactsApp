@@ -12,6 +12,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Contact>()
+            .HasIndex(c => c.Email)
+            .IsUnique();
+
         modelBuilder.Entity<AddressBook>()
             .HasMany(a => a.Contacts)
             .WithOne(c => c.AddressBook)
