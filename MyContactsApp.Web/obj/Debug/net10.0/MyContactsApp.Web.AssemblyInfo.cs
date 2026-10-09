@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyContactsApp.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e98ade02ff42640ba44c26e1711f8f6138e1d1d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a91956a8698ef491d431cd399b5b2abb8420577")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyContactsApp.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyContactsApp.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

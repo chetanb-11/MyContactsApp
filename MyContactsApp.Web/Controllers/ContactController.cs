@@ -114,10 +114,17 @@ public class ContactController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> ShowAll(bool groupByState = false, bool groupByCity = false)
+    public async Task<IActionResult> ShowAll(string? sortBy, bool groupByState = false, bool groupByCity = false)
     {
         var contacts = await _contactService.ShowAllContacts();
 
+        if (sortBy == "name")
+        {
+            contacts = contacts
+                .OrderBy(c => c.FirstName)
+                .ThenBy(c => c.LastName)
+                .ToList();
+        }
         ViewBag.TotalContacts = await _addressBookService.GetTotalContactsCountAsync();
         ViewBag.GroupByState = groupByState;
         ViewBag.GroupByCity = groupByCity;

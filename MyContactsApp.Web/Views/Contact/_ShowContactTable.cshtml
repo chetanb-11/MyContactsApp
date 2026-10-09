@@ -12,7 +12,9 @@ else
         <table class="table table-hover table-striped align-middle border">
             <thead class="table-dark">
             <tr>
-                <th>Name</th>
+                <th>
+                    <a asp-action="ShowAll" asp-route-sortBy="name" class="text-white">Name</a>
+                </th>
                 <th>Address Book</th>
                 <th>Address</th>
                 <th>City / State / Zip</th>
@@ -41,10 +43,13 @@ else
                     <td>@contact.PhoneNumber</td>
                     <td>@contact.Email</td>
                     <td class="text-center">
-                        <a asp-controller="Contact" asp-action="Edit" asp-route-id="@contact.Id" class="btn btn-sm btn-outline-warning">
+                        <a asp-controller="Contact" asp-action="Edit" asp-route-id="@contact.Id"
+                           class="btn btn-sm btn-outline-warning">
                             Edit
                         </a>
-                        <form asp-controller="Contact" asp-action="Delete" asp-route-id="@contact.Id" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                        <form asp-controller="Contact" asp-action="Delete" asp-route-id="@contact.Id" method="post"
+                              class="d-inline"
+                              onsubmit="return confirm('Are you sure you want to delete this contact?');">
                             <button type="submit" class="btn btn-sm btn-outline-danger">
                                 Delete
                             </button>
