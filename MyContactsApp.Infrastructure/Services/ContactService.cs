@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using MyContactsApp.Core.Models;
 using MyContactsApp.Infrastructure.Data;
 
@@ -181,5 +182,18 @@ public class ContactService(AppDbContext appDbContext) : IContactService
             Console.WriteLine(e);
             throw;
         }
+    }
+
+    public Dictionary<string, List<Contact>> GroupbyState()
+    {
+        var contactsByState = _appDbContext.Contacts
+            .AsNoTracking()
+            .OrderBy(c=>c.State);
+        
+        return contactsByState
+            .GroupBy(c => c.State)
+            .ToDictionary(
+                group => group.Key,
+                group => group.ToList());
     }
 }

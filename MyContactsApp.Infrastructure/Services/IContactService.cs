@@ -14,4 +14,5 @@ public interface IContactService
     public Task<bool> DeleteContact(int id);
     public Task<List<Contact>> ShowAllContacts();
     public Task<List<Contact>> SearchContacts(string searchQuery);
+    Dictionary<string, List<Contact>> GroupbyState();
 }
